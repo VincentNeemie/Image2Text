@@ -13,6 +13,7 @@ from PIL import Image, ImageGrab
 import os  
 import threading  
 import clipboard  
+from tkinter import messagebox
   
   
 class Image2Text:
@@ -47,6 +48,7 @@ class Image2Text:
         with open('C:\\Program Files\\Tesseract-OCR\\tesseract.exe', 'rb') as f:
             pytesseract.pytesseract.tesseract_cmd = f.name
 
+
     def ocr(self, image_path):
         """
         Extracts text from an image using Tesseract OCR.
@@ -63,7 +65,7 @@ class Image2Text:
                 text = pytesseract.image_to_string(img, lang=None, nice=0)
                 return text
         except Exception as e:
-            print(f"Error reading image: {e}")
+            messagebox.showerror("Error", f"Error reading image: {e}")
             return ""
 
     def browse_file(self):
@@ -74,10 +76,14 @@ class Image2Text:
         Outputs:
             None
         """
-        file_path = filedialog.askopenfilename(filetypes=[('Image Files', ('*.jpg', '*.png'))])
-        if file_path:
-            t = threading.Thread(target=self.process_image, args=(file_path,))
-            t.start()
+        try:
+            file_path = filedialog.askopenfilename(filetypes=[('All Image Files', '*.*')])
+            if file_path:
+                t = threading.Thread(target=self.process_image, args=(file_path,))
+                t.start()
+        except:
+            messagebox.showerror("Error", "Could not read the image. Please select another image.")
+            self.root.mainloop()
 
     def get_clipboard_image(self):
         """
@@ -93,6 +99,8 @@ class Image2Text:
             image.save(image_file)
             t = threading.Thread(target=self.process_image, args=(image_file,))
             t.start()
+        else:
+            messagebox.showwarning("Warning", "No image found in clipboard")
 
     def process_image(self, image_path):
         """
