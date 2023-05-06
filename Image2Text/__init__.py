@@ -19,8 +19,9 @@ from tkinter import messagebox
 class Image2Text:
     def __init__(self):
         self.root = tk.Tk()
+        self.root.iconbitmap(os.path.join(os.path.dirname(__file__), 'Image2Text.ico'))
         self.root.geometry('500x400')
-        self.root.title('OCR Image')
+        self.root.title('Image2Text')
         self.root.configure(bg='black')  # setting background to black
         self.root.option_add("*Font", "Arial 12 bold")  # making font bold
 
