@@ -1,8 +1,12 @@
 # Image2Text 
  
 The **Image2Text** class is a graphical user interface (GUI) that allows users to extract text from images using Tesseract OCR. 
- 
-## Functionalities 
+
+<center>
+  <img src="https://user-images.githubusercontent.com/92559302/236647407-9e36c923-4efb-4341-be40-c67966f3f184.png" alt="Untitled" style="display: block; margin: auto;">
+</center>
+
+## Functionalities !
  
 The main functionalities of the class include: 
 - Browsing for an image file and extracting text from it 
